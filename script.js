@@ -25,29 +25,3 @@ function nextSlide(){
 }
 
 setInterval(nextSlide, 4000);
-
-
-// WHATSAPP FORM
-
-document.getElementById("whatsappForm").addEventListener("submit", function(e){
-
-  e.preventDefault();
-
-  let name = document.getElementById("name").value;
-  let persons = document.getElementById("persons").value;
-  let packageName = document.getElementById("package").value;
-  let message = document.getElementById("message").value;
-
-  let whatsappMessage =
-`Hello Kashmir Aura,
-Name: ${name}
-Persons: ${persons}
-Package: ${packageName}
-Message: ${message}`;
-
-  let whatsappURL =
-`https://wa.me/919797472650?text=${encodeURIComponent(whatsappMessage)}`;
-
-  window.open(whatsappURL, "_blank");
-
-});
