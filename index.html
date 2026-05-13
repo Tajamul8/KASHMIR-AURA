@@ -421,7 +421,18 @@ loading="lazy">
 
 </footer>
 
-<script>
+<script type="module" src="firebaseSetup.js"></script>
+
+<script type="module">
+
+import { db } from './firebaseSetup.js';
+
+import {
+collection,
+addDoc
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const slides =
 document.querySelectorAll('.slide');
@@ -444,7 +455,7 @@ slides[currentSlide]
 document
 .getElementById('bookingForm')
 
-.addEventListener('submit',function(e){
+.addEventListener('submit', async function(e){
 
 e.preventDefault();
 
@@ -459,6 +470,18 @@ document.getElementById('package').value;
 
 const message =
 document.getElementById('message').value;
+
+try {
+
+await addDoc(collection(db, "bookings"), {
+
+name: name,
+persons: persons,
+package: packageName,
+message: message,
+createdAt: new Date()
+
+});
 
 const whatsappMessage =
 `Hello Kashmir Aura!
@@ -476,9 +499,25 @@ window.open(
 '_blank'
 );
 
+alert("Booking Submitted Successfully!");
+
+document.getElementById('bookingForm').reset();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Error Sending Booking");
+
+}
+
 });
 
 </script>
+
+
 
 <!-- TIDIO LIVE CHAT -->
 
